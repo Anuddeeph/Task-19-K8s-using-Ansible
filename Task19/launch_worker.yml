@@ -1,0 +1,17 @@
+- name: "Launching Worker Node"
+  ec2:
+    key_name: ansiblekey
+    instance_type: t2.micro
+    image: ami-0eeb03e72075b9bcc
+    wait: true
+    group: MultiNodeCluster
+    count: 2
+    vpc_subnet_id: subnet-0ecad70c1783cb8f6
+    assign_public_ip: yes
+    region: ap-south-1
+    state: present
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    instance_tags:
+      Name: WorkerNode
+  register: worker_info
